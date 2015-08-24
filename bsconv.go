@@ -11,5 +11,5 @@ func ToString(b []byte) string {
 
 func ToByte(v string) []byte {
 	sh := (*reflect.StringHeader)(unsafe.Pointer(&v))
-	return *(*[]byte)(unsafe.Pointer(sh.Data))
+	return *(*[]byte)(unsafe.Pointer(sh))
 }
