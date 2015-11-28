@@ -3,6 +3,7 @@ package goutils
 import (
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 func ReadFile(filename string) []byte {
@@ -19,6 +20,13 @@ func ReadFile(filename string) []byte {
 }
 
 func WriteFile(filename string, bs []byte) error {
+	dir := filepath.Dir(filename)
+	dinfo, err := os.Stat(dir)
+	if err != nil || dinfo == nil {
+		if err := (os.MkdirAll(dir, 0777)); err != nil {
+			return err
+		}
+	}
 	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0666)
 	if CheckErr(err) {
 		return err
