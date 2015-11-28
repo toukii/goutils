@@ -19,6 +19,13 @@ func ReadFile(filename string) []byte {
 	return b
 }
 
+func DeleteFile(filename string) {
+	info, err := os.Stat(filename)
+	if info != nil || err == nil {
+		os.Remove(filename)
+	}
+}
+
 func WriteFile(filename string, bs []byte) error {
 	dir := filepath.Dir(filename)
 	dinfo, err := os.Stat(dir)
@@ -27,6 +34,7 @@ func WriteFile(filename string, bs []byte) error {
 			return err
 		}
 	}
+	DeleteFile(filename)
 	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0666)
 	if CheckErr(err) {
 		return err
