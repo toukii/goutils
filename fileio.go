@@ -17,3 +17,16 @@ func ReadFile(filename string) []byte {
 	}
 	return b
 }
+
+func WriteFile(filename string, bs []byte) error {
+	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0666)
+	if CheckErr(err) {
+		return err
+	}
+	defer file.Close()
+	_, err = file.Write(bs)
+	if CheckErr(err) {
+		return err
+	}
+	return nil
+}
