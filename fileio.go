@@ -19,11 +19,16 @@ func ReadFile(filename string) []byte {
 	return b
 }
 
-func DeleteFile(filename string) {
+func DeleteFile(filename string) error {
 	info, err := os.Stat(filename)
 	if info != nil || err == nil {
-		os.Remove(filename)
+		err = os.Remove(filename)
+		if CheckErr(err) {
+			return err
+		}
 	}
+	CheckErr(err)
+	return nil
 }
 
 func WriteFile(filename string, bs []byte) error {
