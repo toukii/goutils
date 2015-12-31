@@ -51,3 +51,7 @@ func WriteFile(filename string, bs []byte) error {
 	}
 	return nil
 }
+
+func ReWriteFile(filename string, bs []byte) error {
+	return ioutil.WriteFile(filename, bs, os.ModeAppend)
+}
