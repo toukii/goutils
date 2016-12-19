@@ -31,6 +31,16 @@ func DeleteFile(filename string) error {
 	return nil
 }
 
+func Mkdir(dirname string) error {
+	dinfo, err := os.Stat(dirname)
+	if err != nil || dinfo == nil {
+		if err := (os.MkdirAll(dirname, 0777)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func WriteFile(filename string, bs []byte) error {
 	dir := filepath.Dir(filename)
 	dinfo, err := os.Stat(dir)
