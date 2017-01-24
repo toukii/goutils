@@ -2,6 +2,7 @@ package goutils
 
 import (
 	"log"
+	"fmt"
 )
 
 func CheckErr(err error) bool {
@@ -10,4 +11,12 @@ func CheckErr(err error) bool {
 		return true
 	}
 	return false
+}
+
+func Log(v ... interface{})  {
+	log.Print(v...)
+}
+
+func Print(v ...interface{}){
+	fmt.Print(v...)
 }
