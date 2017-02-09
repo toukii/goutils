@@ -13,6 +13,14 @@ func CheckErr(err error) bool {
 	return false
 }
 
+func LogCheckErr(err error) bool {
+	if nil != err {
+		log.Println(err)
+		return true
+	}
+	return false
+}
+
 func Log(v ... interface{})  {
 	log.Print(v...)
 }
