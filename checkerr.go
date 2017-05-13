@@ -7,6 +7,7 @@ import (
 
 func CheckErr(err error) bool {
 	if nil != err {
+		fmt.Println(err)
 		return true
 	}
 	return false
