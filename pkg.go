@@ -2,6 +2,7 @@ package goutils
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -77,6 +78,16 @@ func (p *Pkg) analyseDepsErrors() []*NoStdDepErrPkg {
 				Tips:    tips,
 			})
 		}
+	}
+	return ret
+}
+
+type PkgNames []interface{}
+
+func (p *PkgNames) DisplayString() string {
+	ret := ""
+	for i, name := range p {
+		ret += fmt.Sprintf("\t%d. %s", i, name)
 	}
 	return ret
 }
