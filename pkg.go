@@ -2,7 +2,9 @@ package goutils
 
 import (
 	"encoding/json"
+	"os"
 	"path/filepath"
+	"strings"
 )
 
 type Pkg struct {
