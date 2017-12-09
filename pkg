@@ -1,3 +1,10 @@
 = = = [ /Users/toukii/PATH/GOPATH/src/gitlab.1dmy.com/ezbuy/goflow/src/github.com/toukii/goutils ] = = =
 * feature/pkg
 ## cmd: git add .
+## cmd: git commit -m pkg-
+## execute output: [feature/pkg 74bb05b] pkg-
+ 2 files changed, 3 insertions(+), 156 deletions(-)
+ create mode 100644 pkg
+ delete mode 100644 pkg.go
+
+## cmd: git push origin feature/pkg:feature/pkg
