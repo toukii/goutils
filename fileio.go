@@ -1,6 +1,7 @@
 package goutils
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -23,12 +24,19 @@ func DeleteFile(filename string) error {
 	info, err := os.Stat(filename)
 	if info != nil || err == nil {
 		err = os.Remove(filename)
-		if CheckErr(err) {
+		if CheckNoLogErr(err) {
 			return err
 		}
 	}
-	CheckErr(err)
-	return nil
+	return err
+}
+
+func FileIsExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if info != nil || err == nil {
+		return true
+	}
+	return false
 }
 
 func Mkdir(dirname string) error {
@@ -59,6 +67,31 @@ func WriteFile(filename string, bs []byte) error {
 	if CheckErr(err) {
 		return err
 	}
+	fmt.Printf("data writing ==> %s\n", filename)
+	return nil
+}
+
+func SafeWriteFile(filename string, bs []byte) error {
+	dir := filepath.Dir(filename)
+	dinfo, err := os.Stat(dir)
+	if err != nil || dinfo == nil {
+		if err := (os.MkdirAll(dir, 0777)); err != nil {
+			return err
+		}
+	}
+	if FileIsExists(filename) {
+		return fmt.Errorf("%s already exists.", filename)
+	}
+	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0666)
+	if CheckErr(err) {
+		return err
+	}
+	defer file.Close()
+	_, err = file.Write(bs)
+	if CheckErr(err) {
+		return err
+	}
+	fmt.Printf("data writing ==> %s\n", filename)
 	return nil
 }
 
