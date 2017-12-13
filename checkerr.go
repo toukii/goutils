@@ -3,7 +3,7 @@ package goutils
 import (
 	"fmt"
 	"log"
-	"runtime"
+	// "runtime"
 
 	cr "github.com/fatih/color"
 )
@@ -16,12 +16,12 @@ var (
 
 func CheckErr(err error) bool {
 	if nil != err {
-		funcName, file, line, ok := runtime.Caller(1)
-		if ok {
-			fmt.Printf("%s Line:%s Func:%s ERR:%s\n", warnCr.Sprint(file), infoCr.Sprint(line), infoCr.Sprint(runtime.FuncForPC(funcName).Name()), errCr.Sprint(err.Error()))
-		} else {
-			errCr.Println(err)
-		}
+		// funcName, file, line, ok := runtime.Caller(1)
+		// if ok {
+		// 	fmt.Printf("%s Line:%s Func:%s ERR:%s\n", warnCr.Sprint(file), infoCr.Sprint(line), infoCr.Sprint(runtime.FuncForPC(funcName).Name()), errCr.Sprint(err.Error()))
+		// } else {
+		// }
+		errCr.Println(err)
 		return true
 	}
 	return false
