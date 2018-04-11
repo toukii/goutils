@@ -21,7 +21,7 @@ func CheckErr(err error) bool {
 		// 	fmt.Printf("%s Line:%s Func:%s ERR:%s\n", warnCr.Sprint(file), infoCr.Sprint(line), infoCr.Sprint(runtime.FuncForPC(funcName).Name()), errCr.Sprint(err.Error()))
 		// } else {
 		// }
-		errCr.Println(err)
+		fmt.Println(err)
 		return true
 	}
 	return false
