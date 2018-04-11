@@ -7,14 +7,15 @@ import (
 	"path/filepath"
 )
 
-func ReadFile(filename string) []byte {
+func ReadFile(filename string, logg ...bool) []byte {
 	file, err := os.OpenFile(filename, os.O_RDONLY, 0644)
-	if CheckErr(err) {
+
+	if logg == nil && CheckErr(err) || logg != nil && logg[0] && err != nil {
 		return nil
 	}
 	defer file.Close()
 	b, err := ioutil.ReadAll(file)
-	if CheckErr(err) {
+	if logg == nil && CheckErr(err) || logg != nil && logg[0] && err != nil {
 		return nil
 	}
 	return b
